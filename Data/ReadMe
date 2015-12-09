@@ -1,0 +1,132 @@
+J/A+A/553/A24       Models for rotating stars                (Georgy+, 2013)
+================================================================================
+Populations of rotating stars.
+I. Models from 1.7 to 15M_{sun}_ at Z = 0.014, 0.006, and 0.002 with
+{Omega}/{Omega}_crit_ between 0 and 1.
+    Georgy C., Ekstrom S., Granada A., Meynet G., Mowlavi N., Eggenberger P.,
+    Maeder A.
+   <Astron. Astrophys. 553, A24 (2013)>
+   =2013A&A...553A..24G
+================================================================================
+ADC_Keywords: Models, evolutionary ; Stars, Be ; Mass loss
+Keywords: stars: general - stars: evolution - stars: rotation -
+          stars: emission-line, Be - stars: mass-loss
+
+Abstract:
+    B-type stars are known to rotate at various velocities, including very
+    fast rotators near the critical velocity as the Be stars.
+
+    In this paper, we provide stellar models covering the mass range
+    between 1.7 to 15M_{sun}_, which includes the typical mass of known Be
+    stars, at Z=0.014, 0.006 and 0.002 and for an extended range of
+    initial velocities on the zero-age main sequence. We use the Geneva
+    stellar-evolution code including the effects of shellular rotation and
+    with a numerical treatment that has been improved in order for the
+    code to track in a precise way the variation of the angular momentum
+    content of the star as it changes under the influence of radiative
+    winds and/or mechanical mass loss. We discuss the impact of the
+    initial rotation rate on the tracks in the Hertzsprung-Russell
+    diagram, the main-sequence (MS) lifetimes, the evolution of the
+    surface rotation and abundances, as well as on the ejected masses of
+    various isotopes. Among the new results obtained from the present grid
+    we have that: 1) fast rotating stars with initial masses around
+    1.7M_{sun}_ present at the beginning of the core hydrogen-burning
+    phase quite small convective cores with respect to their slowly
+    rotating counterparts. This fact may be interesting to keep in mind in
+    the frame of the asteroseismic studies of such stars; 2) the contrast
+    between the core and surface angular velocity is higher in slower
+    rotating stars. The values presently obtained are quite in the range
+    of the very few values obtained for B-type stars from
+    asteroseismology; 3) at Z=0.002, the stars in the mass range of 1.7 to
+    3M_{sun}_ with a mean velocity on the MS of the order of 150km/s show
+    N/H enhancement superior to 0.2dex at mid-MS, and superior to 0.4dex
+    at the end of the MS phase. At solar metallicity the corresponding
+    values are below 0.2dex at any time in the MS. An extended database of
+    stellar models containing 270 evolutionary tracks is provided to the
+    community.
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName   Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe         80        .   This file
+models.dat    570   108000   Evolutionary tracks for 270 combinations of
+                             initial M, Z and {Omega}/{Omega}_crit_
+files.tar    1386   108379   All the individual files for the 270
+                             evolutionary tracks
+--------------------------------------------------------------------------------
+
+See also:
+ J/A+A/291/155  : Rotating neutron stars models .I. (Salgado+, 1994)
+ J/A+AS/108/455 : Rotating neutron stars models. II. (Salgado+, 1994)
+ J/A+A/346/586  : Rotating models of A and F stars (Perez Hernandez+, 1999)
+ J/A+A/530/A115 : Rotating massive MS stars evolutionary models (Brott+, 2011)
+ J/A+A/537/A146 : Stellar models with rotation. 0.8<M<120, Z=0.014
+                                                             (Ekstrom+, 2012)
+
+Byte-by-byte Description of file: models.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units        Label     Explanations
+--------------------------------------------------------------------------------
+   1-  4  F4.1  Msun         Mini      Initial mass (1)
+   6- 10  F5.3  ---          Zini      Initial Z abundance (1)
+  12- 15  F4.2  ---          OOcini    {Omega}/{Omega}_crit_ value (1)
+  17- 19  I3    ---          Line      Number of selected point
+  21- 42 E22.15 yr           Time      Age
+  44- 54  F11.6 Msun         Mass      Actual mass in solar masses
+  55- 64  F10.6 [Lsun]       logL      log(luminosity) in solar units
+  66- 74  F9.6  [K]          logTe     log(effective temperature)
+  76- 89  E14.7 ---          X         H    surface abundance (mass fraction)
+  91-104  E14.7 ---          Y         He   surface abundance (mass fraction)
+ 106-119  E14.7 ---          C12       12C  surface abundance (mass fraction)
+ 121-134  E14.7 ---          C13       13C  surface abundance (mass fraction)
+ 136-149  E14.7 ---          N14       14N  surface abundance (mass fraction)
+ 151-164  E14.7 ---          O16       16O  surface abundance (mass fraction)
+ 166-179  E14.7 ---          O17       17O  surface abundance (mass fraction)
+ 181-194  E14.7 ---          O18       18O  surface abundance (mass fraction)
+ 196-209  E14.7 ---          Ne20      20Ne surface abundance (mass fraction)
+ 211-224  E14.7 ---          Ne22      22Ne surface abundance (mass fraction)
+ 226-235  E10.3 ---          Al26      26Al surface abundance (mass fraction)
+ 237-243  F7.4  ---          QCC       convective core mass fraction
+ 245-253  F9.6  [K]          logTu     log(uncorrected Teff)  (WR stars only)
+ 255-262  F8.3 [Msun/yr]     logdM/dt  log(mass loss rate)
+ 264-272  F9.6  [g/cm3]      log(rhoc) log(central density)
+ 274-282  F9.6  [K]          logTc     log(central temperature)
+ 284-297  E14.7 ---          Xc        H    central abundance (mass fraction)
+ 299-312  E14.7 ---          Yc        4He  central abundance (mass fraction)
+ 314-327  E14.7 ---          C12c      12C  central abundance (mass fraction)
+ 329-342  E14.7 ---          C13c      13C  central abundance (mass fraction)
+ 344-357  E14.7 ---          N14c      14N  central abundance (mass fraction)
+ 359-372  E14.7 ---          O16c      16O  central abundance (mass fraction)
+ 374-387  E14.7 ---          O17c      17O  central abundance (mass fraction)
+ 389-402  E14.7 ---          O18c      18O  central abundance (mass fraction)
+ 404-417  E14.7 ---          Ne20c     20Ne central abundance (mass fraction)
+ 419-432  E14.7 ---          Ne22c     22Ne central abundance (mass fraction)
+ 434-443  E10.3 ---          Al26c     26Al central abundance (mass fraction)
+ 445-454  E10.3 s-1          Omegas    Surface angular velocity
+ 456-465  E10.3 s-1          Omegac    Central angular velocity
+ 467-476  E10.3 ---          RpRe      Oblateness (polar/equatorial radius)
+ 478-487  E10.3 ---          dM/dtR    Rotational dM/dt correction factor
+ 489-497  E9.2  km/s         vcrit1    First critical velocity ({Omega}-limit)
+ 499-507  E9.2  km/s         vcrit2    Second critical velocity
+                                        ({Omega}{Gamma}-limit)
+ 509-517  E9.2  km/s         veq       Equatorial velocity
+ 519-527  F9.6  ---          OOc       {Omega}_surf_/{Omega}_crit_
+ 529-537  F9.6  ---          Gedd      Eddington factor {Gamma}_Edd_
+ 539-552  E14.7 Msun/yr      dM/dtm    Mechanical equatorial dM/dt
+ 554-570 E17.10 10+53g.cm2/s Ltot      Total angular momentum
+--------------------------------------------------------------------------------
+Note (1): Initial values:
+  * Initial mass values:
+    1.7 2.0 2.5 3.0 4.0 5.0 7.0 9.0 12.0 15.0
+  * Initial Z values:
+    0.002 0.006 0.014
+  * Initial {Omega}/{Omega}_crit_ values:
+    0.00 0.10 0.30 0.50 0.60 0.70 0.80 0.90 0.95
+--------------------------------------------------------------------------------
+
+Acknowledgements:
+   Cyril Georgy, c.georgy (at)keele.ac.uk
+
+================================================================================
+(End)      Cyril Georgy [Keele University], Patricia Vannier [CDS]   08-Mar-2013

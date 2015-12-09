@@ -1,0 +1,114 @@
+
+\documentclass[preprint]{aastex}
+
+\usepackage{graphicx}
+
+\shorttitle{Multi-Dimensional Interpolation Between Stellar Evolution Tracks Using
+Machine Learning Techniques}
+\shortauthors{Tassos Fragos}
+
+
+
+\title{Multi-Dimensional Interpolation Between Stellar Evolution Tracks Using
+Machine Learning Techniques}
+
+
+\author{Tassos Fragos\affil{University of Geneva} Laura Sampson\affil{Northwestern University}  Vicky Kalogera\affil{Northwestern University}}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+
+Here goes an abstract
+
+\end{abstract}
+    
+
+\section{Motivation}
+    
+Population synthesis studies of single and binary stars, often require the calculation of the evolution of hundred of thousands or millions of evolutionary tracks in order to derive statistically robust results of the overall characteristics of the stellar population. The detailed modeling, however, of the evolution of a star, including its internal structure, requires anywhere from tens to several hundreds of CPU hours. This makes the brute force modeling of a stellar population, where each star differs from the others in one or more \textit{initial} properties, prohibitively computationally expensive. When one considers the evolution of binary stars or the formation of rare exotic stellar systems (e.g. progenitors of Gamma-ray bursts, ultra-luminous X-ray sources and double compact object mergers), the problem becomes even more difficult, as on the one hand the number of initial properties of binary stars is $\sim 3$ times larger than that of single stars, and on the other hand for the modeling of exotic stellar systems requires the calculation of the evolution of a very large number of binaries.
+    
+    
+    
+    
+    
+
+\section{Current state of the art}
+
+Two types of approaches have been taken so far in the literature in order to address this issue. In both approaches one first calculates a grid of stellar evolution tracks, covering the desired range of initial properties of stars. For single stars, usually two or three initial properties are considered (initial mass, metallicity, and initial rotation ). The first approach, which is also the most computationally efficient, is to derive analytical fitting formulae that that approximate the evolution of stars , providing estimates of stellar properties, such as the stellar luminosity, radius and core mass, as a function of age, $M_{ZAMS}$ and Z. \citet{Hurley2000} derived such formulae for a wide range of ZAMS mass $M_{ZAMS}$ and metallicity Z, for all phases from the zero-age main sequence up to, and including, the remnant stages. Although this type of approach has proven successful and it has been used in over $\sim 700$ studies in the last 15 years, it also has some serious limitations. Namely, these fitting formulae assume constant mass stars, i.e. no stellar winds or readjusting the mass of the star because of other processes, and do not take into account stellar rotation. Trying to derive fitting formulae that take into account these two effects will increase significantly the complexity of the problem and most likely deem it intractable.
+
+The second approach is to simply interpolate between pre-calculated evolution tracks with neighboring initial properties. This approach has been taken by a large number of researchers since the 80s, with the most recent study being a new populations synthesis code \citep{2014A&A...566A..21G}. One of the functionalities of this code is two provide interpolated stellar evolution tracks for a wide range of initial masses metallicities and initial rotational rates, base on three different grids of several hundred precalculated track, that cover different parts of the parameter space. The process that the authors are following is to store 400 \textit{"carefully selected"} points in time for each precalculated track. Then, if the evolutionary track of a star with properties different than the precalculated ones is requested, a simple interpolation is performed between the tracks with closest values of initial mass, rotation and metallicity. The robustness of this method is based on the hand-picked 400 times points that are stored for each precalculated track, that ensure that none of characteristic edges and loops of the tracks are skipped during the interpolation. The caveat with this approach is that 1) it only takes into account the closest neighboring precalculated tracks, 2) it does not take into account possible inherent correlation between the different properties of the star that are stored and interpolated, 3) little work has been done to quantitatively assess the accuracy of the method.
+
+
+    
+    
+    
+    
+    
+    
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.7\columnwidth]{Figure8}
+\caption{(Figure taken from \citet{2014A&A...566A..21G}) To illustrate the accuracy of the interpolation, we compare a $7\,M_\odot$ model with $\omega_{ini} = 0.5$ (red solid curve) obtained by interpolation between $5\,M_\odot$ (black) and $9\,M_\odot$ (blue) models of identical $\omega_{ini}$ with the ``real'' $7\,M_\odot$ model (red dashed curve) from \citet{Georgy:2013jp}.}
+\end{center}
+\end{figure}
+
+\section{Proposed work}
+    
+Here we propose to develop an innovative hybrid and dynamically-improving scheme for binary mass- transfer sequences to feed back to the population synthesis wrapper: we propose to employ Gaussian Processes and/or Deep Neural Networks and radial basis function networks, to effectively interpolate the results of a mass-transfer sequence based on sequence grids calculated in detail with MESA \citep[a state-of-the-art stellar evolution code; ][]{Paxton2011,2013ApJS..208....4P,2015arXiv150603146P}  off-line. Gaussian Processes are known for their effectiveness as a non-parametric, interpolation tool in high-dimensional spaces, even if the space is not sampled on a regular grid; the method is rooted in Bayesian statistics and the interpolation uses information from pre-existing samplings of the space. At least one area where they have been incorporated in astrophysics is in cosmological simulations and the derivation of constraints on cosmological parameters (see Habib et al. (2007) and subsequent work from this team). 
+    
+A radial basis function network is an artificial neural network that uses radial basis functions as activation functions. The output of the network is a linear combination of radial basis functions of the inputs and neuron parameters. Radial basis function networks have many uses, including function approximation, time series prediction, classification, and system control. Radial basis function networks networks can be used to interpolate a function y: $\mathbb{R}^n \to \mathbb{R}$ when the values of that function are known on finite number of points: $y(\mathbf x_i) = b_i, i=1, \ldots, N$. Taking the known points $\mathbf x_i$ to be the centers of the radial basis functions and evaluating the values of the basis functions at the same points $g_{ij} = \rho(|| \mathbf x_j - \mathbf x_i ||)$ the weights can be solved from the equation
+$$
+\left[ \begin{array}{cccc} 
+g_{11} & g_{12} & \cdots & g_{1N} \\
+g_{21} & g_{22} & \cdots & g_{2N} \\
+\vdots &        & \ddots & \vdots \\
+g_{N1} & g_{N2} & \cdots & g_{NN}
+\end{array}\right] 
+\left[ \begin{array}{cccc}
+w_1 \\
+w_2 \\
+\vdots \\
+w_N
+\end{array}{c} \right] = \left[ \begin{array}{c}
+b_1 \\
+b_2 \\
+\vdots \\
+b_N
+\end{array}{c} \right]$$
+It can be shown that the interpolation matrix in the above equation is non-singular, if the points $\mathbf x_i$ are distinct, and thus the weights w can be solved by simple linear algebra:
+$$\mathbf{w} = \mathbf{G}^{-1} \mathbf{b}$$
+If the purpose is not to perform strict interpolation but instead more general function approximation or classification the optimization is somewhat more complex because there is no obvious choice for the centers. The training is typically done in two phases first fixing the width and centers and then the weights. This can be justified by considering the different nature of the non-linear hidden neurons versus the linear output neuron.    
+    
+    
+We intend to adopt this statistical method and develop a reliable but efficient framework with the following key elements:
+\begin{itemize}
+\item First,grids of mass{\textendash}transfer sequences will be built for the most common evolutionary phases relevant to massive binaries: (i) mass transfer between two non-degenerate massive stars of varying masses, evolutionary ages, and orbital eccentricity; (ii) mass transfer from non-degenerate massive H-rich or He-rich stars onto neutron stars and black holes of varying masses, evolutionary, age, and orbital eccentricity. The grids will be constructed with and without rotation and they will serve as the stepping stone for the population simulations.
+\item During population runs, when the need for a mass-transfer sequence arises, there will be two options: (i) Gaussian Processes are employed using pre-existing, stored sequences to calculate in just seconds the outcome of the sequence at hand or (ii) if the pre-existing sequences are not sampling the region of interest adequately, then MESA will actually be called, the sequence will be calculated in {\textquotedblleft}live{\textquotedblright} mode, and will be added to the stored set for future use. Which of the two options will be followed will depend on assessing the fidelity of the proposed interpolation using Gaussian Processes.
+\end{itemize}
+
+It is evident that the proposed computational scheme is both {\textquotedblleft}hybrid{\textquotedblright} (with both {\textquotedblleft}live{\textquotedblright} and interpolated calculations) and {\textquotedblleft}dynamically improving{\textquotedblright} (as new MESA mass-transfer sequences are calculated they are added to the now-becoming a non-regular grid, continually improving the sampling of the parameter space, and continually reducing the need for {\textquotedblleft}live{\textquotedblright} calculations. Consequently, the more synthesis runs we perform, the faster they will become.
+    
+    
+    
+    
+    
+    
+    
+    
+
+\section{First steps}
+    
+The first step in this project will be to develop preliminary implementations of both methods using publicly available libraries (e.g. https://github.com/dclambert/Python-ELM , http://scikit-learn.org/stable/modules/gaussian\_process.html). The first data set on which we can test the different interpolation methods and quantitatively assess their performance and robustness could potentially be the published grid of single star evolutionary tracks, published by the Geneva group \citep{Georgy:2013jp}, with the actual data being publicly available \citep{Georgy:2013wg}. This grid contains evolutionary tracks of A, B and late O stars, for 30 initial ZAMS masses, 3 metallicities, and 3 different initial rotation rates.
+
+
+
+\bibliographystyle{apj}
+\bibliography{papers3}
+
+\end{document}
+
